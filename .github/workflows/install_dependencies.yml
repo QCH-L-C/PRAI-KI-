@@ -1,0 +1,23 @@
+name: Install Dependencies
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Upgrade Pip and Install Requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || { echo "Pip install schlug fehl."; exit 1; }
+
+      - name: Verify TensorFlow Installation
+        run: |
+          python -c "import tensorflow as tf; print('TensorFlow version:', tf.__version__)" || { echo "TensorFlow konnte nicht importiert werden."; exit 1; }
