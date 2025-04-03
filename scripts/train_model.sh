@@ -1,3 +1,6 @@
+train_model.sh
+Dieses Skript automatisiert das Training des KI-Modells.
+
 #!/bin/bash
 
 # Skript zum Training des KI-Modells
