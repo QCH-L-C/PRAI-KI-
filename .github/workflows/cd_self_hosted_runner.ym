@@ -10,27 +10,23 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      # Schritt 1: Repository auschecken
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Schritt 2: Python-Umgebung validieren
       - name: Validate Python Environment
         run: |
-          echo "Überprüfen der Python-Installation..."
-          python3 --version || echo "Python ist nicht installiert!"
-          pip3 --version || echo "Pip ist nicht installiert!"
+          echo "Überprüfe Python- und Pip-Version..."
+          python3 --version || echo "Python fehlt!"
+          pip3 --version || echo "Pip fehlt!"
 
-      # Schritt 3: DNS-Validierung
       - name: Check DNS Resolution
         run: |
-          echo "Überprüfen der DNS-Auflösung..."
+          echo "Validiere DNS-Auflösung für <actual-server-hostname-or-ip>..."
           if ! getent hosts <actual-server-hostname-or-ip>; then
-            echo "DNS-Auflösung fehlgeschlagen für <actual-server-hostname-or-ip>"
+            echo "DNS-Auflösung fehlgeschlagen."
             exit 1
           fi
 
-      # Schritt 4: Deployment-Prozess via SSH
       - name: Deploy Application via SSH
         run: |
           echo "Starte Deployment..."
@@ -39,13 +35,12 @@ jobs:
               echo "Deployment erfolgreich!"
               break
             else
-              echo "SSH-Verbindung fehlgeschlagen, neuer Versuch in 5 Sekunden..."
+              echo "SSH-Verbindung fehlgeschlagen, versuche erneut in 5 Sekunden..."
               sleep 5
             fi
           done
 
-      # Schritt 5: Deployment-Logs analysieren
       - name: Debug Deployment Logs
         run: |
-          echo "Analysiere die letzten Logs des Deployments..."
-          tail -n 50 /path/to/logs/deployment.log || echo "Log-Datei nicht gefunden!"
+          echo "Analysiere die letzten 50 Zeilen der Log-Datei..."
+          tail -n 50 /path/to/logs/deployment.log || echo "Keine Log-Datei gefunden!"
