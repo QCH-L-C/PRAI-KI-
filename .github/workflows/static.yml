@@ -1,1 +1,74 @@
-.
+Die Datei ist darauf ausgelegt, grundlegende Schritte wie Installation, Testen und Linting zu automatisieren:
+
+yaml
+# static.yml
+name: Static Code Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  static-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout Repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Run Linter
+      - name: Lint Code
+        run: |
+          pip install flake8
+          flake8 .
+
+      # Run Tests
+      - name: Run Tests
+        run: |
+          python -m unittest discover tests
+
+      # Optional: Security Check
+      - name: Run Safety Check
+        run: |
+          pip install safety
+          safety check
+
+Erklärung der static.yml-Datei
+Trigger:
+
+Der Workflow startet bei einem Push auf den main-Branch oder bei einem Pull Request. Dies hilft, den Code zu validieren, bevor er in den Hauptbranch gemischt wird.
+
+Jobs:
+
+Der Job static-check läuft auf einem Ubuntu-Betriebssystem.
+
+Schritte:
+
+Checkout: Ruft den Repository-Code ab.
+
+Setup Python: Installiert Python 3.8 (Du kannst die Version anpassen).
+
+Install Dependencies: Aktualisiert pip und installiert die Abhängigkeiten aus requirements.txt.
+
+Lint Code: Führt flake8 aus, um den Code auf Style- und Syntaxfehler zu überprüfen.
+
+Run Tests: Führt die Unit-Tests aus dem Verzeichnis tests/ aus, um sicherzustellen, dass der Code korrekt funktioniert.
+
+Safety Check: Optionaler Schritt zur Überprüfung von Sicherheitsrisiken in den installierten Paketen mit safety.
