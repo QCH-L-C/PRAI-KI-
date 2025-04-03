@@ -1,0 +1,51 @@
+name: CD Workflow - Self-Hosted Runner
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      # Schritt 1: Repository auschecken
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Schritt 2: Python-Umgebung validieren
+      - name: Validate Python Environment
+        run: |
+          echo "Überprüfen der Python-Installation..."
+          python3 --version || echo "Python ist nicht installiert!"
+          pip3 --version || echo "Pip ist nicht installiert!"
+
+      # Schritt 3: DNS-Validierung
+      - name: Check DNS Resolution
+        run: |
+          echo "Überprüfen der DNS-Auflösung..."
+          if ! getent hosts <actual-server-hostname-or-ip>; then
+            echo "DNS-Auflösung fehlgeschlagen für <actual-server-hostname-or-ip>"
+            exit 1
+          fi
+
+      # Schritt 4: Deployment-Prozess via SSH
+      - name: Deploy Application via SSH
+        run: |
+          echo "Starte Deployment..."
+          for i in {1..5}; do
+            if ssh user@<actual-server-hostname-or-ip> "cd /path/to/app && git pull && passenger restart"; then
+              echo "Deployment erfolgreich!"
+              break
+            else
+              echo "SSH-Verbindung fehlgeschlagen, neuer Versuch in 5 Sekunden..."
+              sleep 5
+            fi
+          done
+
+      # Schritt 5: Deployment-Logs analysieren
+      - name: Debug Deployment Logs
+        run: |
+          echo "Analysiere die letzten Logs des Deployments..."
+          tail -n 50 /path/to/logs/deployment.log || echo "Log-Datei nicht gefunden!"
