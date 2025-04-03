@@ -1,1 +1,8 @@
-.
+1. PRAI Logo (prai_logo.png)
+
+Mit Python und der Bibliothek Pillow kannst Du ein einfaches Logo erstellen:
+
+python
+
+from PIL import Image, ImageDraw, ImageFont # Erstelle ein leeres Bild image = Image.new('RGB', (500, 300), color=(10, 20, 50)) # Dunkelblauer Hintergrund draw = ImageDraw.Draw(image) # Text hinzufügen font = ImageFont.truetype("arial.ttf", 40) # Passe die Schriftart an text = "PRAI" text_width, text_height = draw.textsize(text, font=font) text_x = (image.width - text_width) // 2 text_y = (image.height - text_height) // 2 draw.text((text_x, text_y), text, font=font, fill=(255, 215, 0)) # Goldener Text # Speichere das Bild image.save("prai_logo.png") print("Das Logo wurde als prai_logo.png gespeichert.")
+
