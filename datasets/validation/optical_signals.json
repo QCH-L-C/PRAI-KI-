@@ -1,3 +1,6 @@
+Die JSON-Datei enthält simulierte Daten für optische Signale und ihre Eigenschaften, um die Ergebnisse der optischen Simulation und KI-Vorhersagen zu validieren.
+
+json
 {
     "validation_signals": [
         {
@@ -62,3 +65,33 @@
         }
     ]
 }
+
+Beschreibung der Felder
+signal_id: Eindeutige ID des Signals zur Identifizierung.
+
+frequency: Frequenz des optischen Signals in Hz.
+
+amplitude: Amplitude des optischen Signals.
+
+optical_constant: Optische Konstante oder Brechungsindex des Mediums.
+
+duration: Dauer des Signals in Sekunden.
+
+sampling_rate: Abtastrate des Signals in Hz.
+
+expected_energy: Erwartete Energie des Signals, berechnet durch die Simulation.
+
+expected_properties: Validierungseigenschaften des Signals:
+
+mean: Erwarteter Mittelwert der Signalwerte.
+
+std_dev: Erwartete Standardabweichung.
+
+max: Maximalwert des Signals.
+
+min: Minimalwert des Signals.
+
+Verwendung
+Validierung der Simulation: Diese Daten können verwendet werden, um die Ergebnisse der optischen Wechselwirkungen und Berechnungen zu testen.
+
+KI-Test: Die Validierungssignale bieten eine Grundlage, um die Vorhersagen des neuronalen Netzwerks zu überprüfen.
