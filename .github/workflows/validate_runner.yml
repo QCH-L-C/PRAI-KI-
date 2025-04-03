@@ -1,0 +1,28 @@
+name: Validate Self-Hosted Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate-runner:
+    runs-on: self-hosted
+
+    steps:
+      # Schritt 1: Überprüfen der Python-Installation
+      - name: Validate Python Environment
+        run: |
+          echo "Überprüfen der Python-Installation..."
+          python3 --version || echo "Python ist nicht installiert!"
+          pip3 --version || echo "Pip ist nicht installiert!"
+
+      # Schritt 2: Runner-Dienste überprüfen
+      - name: Validate Runner Services
+        run: |
+          echo "Überprüfen, ob der Runner-Dienst aktiv ist..."
+          ps aux | grep actions-runner || echo "Self-Hosted Runner ist nicht aktiv!"
+
+      # Schritt 3: Debug-Tools installieren
+      - name: Install Debug Tools
+        run: |
+          sudo apt-get update && sudo apt-get install -y net-tools
+          echo "Debug-Tools installiert."
