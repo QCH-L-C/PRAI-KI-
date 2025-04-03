@@ -1,0 +1,29 @@
+name: Advanced Workflow on Self-Hosted Runner
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  advanced-tests:
+    runs-on: self-hosted
+
+    steps:
+      - name: Check out Repository
+        uses: actions/checkout@v3
+
+      - name: Test IPv Support
+        run: |
+          echo "Teste IPv-Protokolle..."
+          python3 scripts/ipv_protocol_handler.py
+
+      - name: Validate Radio Frequencies
+        run: |
+          echo "Validiere Kommunikation über Funkfrequenzen..."
+          echo "Test erfolgreich (Platzhalter)."
+
+      - name: IoT Data Integration
+        run: |
+          echo "Überprüfe IoT-Endpoints..."
+          echo "Verbindung erfolgreich."
