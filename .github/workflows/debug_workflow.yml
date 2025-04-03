@@ -1,0 +1,31 @@
+name: Debugging Workflow
+
+on:
+  workflow_run:
+    workflows:
+      - all_workflows
+    types:
+      - completed
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Analyze Logs
+        run: |
+          echo "Analysiere die Logs der fehlerhaften Workflows..."
+          if [ -d logs ]; then
+            grep -i "error" logs/*.log || echo "Keine Fehler gefunden."
+          else
+            echo "Log-Verzeichnis nicht gefunden."
+          fi
+
+      - name: Output Workflow Status
+        run: |
+          echo "Fehlgeschlagene Workflows anzeigen:"
+          curl -s https://api.github.com/repos/${{ github.repository }}/actions/runs \
+          | jq '.workflow_runs[] | select(.conclusion=="failure") | .name, .html_url'
