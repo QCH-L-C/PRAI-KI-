@@ -11,6 +11,7 @@ REPO_URL="https://github.com/QCH-L-C/PRAI-KI-"
 TOKEN="BKELILVAGZ6V5FVWE7TIJDDH54T2Y"
 RUNNER_VERSION="2.323.0"
 RUNNER_FOLDER="/home/$(whoami)/actions-runner"
+SANDBOX_PORT=8080
 
 # Runner-Verzeichnis erstellen
 echo "Erstelle das Runner-Verzeichnis..."
@@ -28,23 +29,29 @@ echo "0dbc9bf5a58620fc52cb6cc0448abcca964a8d74b5f39773b7afcad9ab691e19  actions-
 echo "Extrahiere Dateien..."
 tar xzf ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
 
-# Erweiterungen: VPN- und IPv-Konfiguration
-echo "Richte VPN-Tunnel und IPv-Protokolle (inkl. IPv7, 8 und 9) ein..."
-sudo apt-get install -y openvpn
-echo "VPN und IPv-Protokolle konfiguriert."
-
-# Erweiterung: IoT-Device-Integration und Funkfrequenzen
-echo "Verknüpfe IoT-Geräte und Funkfrequenzen..."
-# Beispiel: IoT-Daten-Endpoints einrichten (Simulation)
-sudo echo "IoT-Endpoints aktiviert (Platzhalter)."
-
 # Runner konfigurieren
 echo "Konfiguriere Runner..."
 ./config.sh --url $REPO_URL --token $TOKEN
 
-# Runner als Dienst starten
-echo "Richte Runner als Systemdienst ein..."
-sudo ./svc.sh install
-sudo ./svc.sh start
+# Sandbox-Funktion hinzufügen
+echo "Starte Sandbox..."
+sudo apt-get install -y python3 python3-pip
+pip install flask
+cat << EOF > sandbox_website.py
+from flask import Flask, render_template
+app = Flask(__name__)
 
-echo "Linux Self-Hosted Runner mit allen Erweiterungen erfolgreich eingerichtet!"
+@app.route("/")
+def home():
+    return "<h1>Willkommen in der PRAI-Sandbox</h1><p>Verbunden mit Deinem Repository!</p>"
+
+@app.route("/chat")
+def chat():
+    return "<h2>PRAI Chatbox</h2><textarea placeholder='Frag mich etwas...'></textarea>"
+
+if __name__ == "__main__":
+    app.run(port=$SANDBOX_PORT)
+EOF
+python3 sandbox_website.py &
+
+echo "Linux Runner erfolgreich eingerichtet mit einer PRAI-Sandbox Website!"
