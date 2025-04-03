@@ -32,3 +32,10 @@ logging:
 ports:
   chatbox: 5000         # Port für Chatbox
   api: 5001             # Port für API
+
+Hinweise
+Standardkonfiguration (default.yaml):
+
+Wird von Deiner Anwendung verwendet, um Grundwerte festzulegen.
+
+Kann bei Bedarf überschrieben werden, z. B. durch spezifische Werte aus der Entwicklungsumgebung.
