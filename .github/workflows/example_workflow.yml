@@ -1,4 +1,4 @@
-name1: Advanced Workflow on Self-Hosted Runner
+name : Advanced Workflow on Self-Hosted Runner
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
 
 
 
-name2: Advanced Website Workflow on Self-Hosted Runner
+name : Advanced Website Workflow on Self-Hosted Runner
 
 on:
   push:
