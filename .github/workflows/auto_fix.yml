@@ -1,0 +1,33 @@
+name: Auto-Fix Workflow
+
+on:
+  workflow_run:
+    workflows: 
+      - all_workflows
+    types:
+      - completed
+
+jobs:
+  auto-fix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Check for Missing Files
+        run: |
+          echo "Überprüfe fehlende Dateien..."
+          REQUIRED_FILES=("README.md" "requirements.txt" ".gitignore")
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "$file fehlt. Erstelle die Datei..."
+              touch $file
+            fi
+          done
+
+      - name: Reinstall Dependencies
+        run: |
+          echo "Installiere Abhängigkeiten neu..."
+          python -m pip install --upgrade pip || echo "pip Upgrade fehlgeschlagen."
+          pip install -r requirements.txt || echo "Fehler bei der Installation von Abhängigkeiten."
