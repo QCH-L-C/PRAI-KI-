@@ -1,0 +1,18 @@
+name: Data Validation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Validate Data
+        run: |
+          python scripts/data_cleaner.py

@@ -1,11 +1,43 @@
+# Betriebssystem-Spezifisches
+.DS_Store
+Thumbs.db
+
+# Python-bezogene Dateien
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.log
+
+# Virtuelle Umgebungen und Umgebungsvariablen
+venv/
+.env
+
+# Build- und Distributionsdateien
+build/
+dist/
+*.egg-info/
+
 # Build and Release Folders
 bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
 
-# Other files and folders
+# IDE-bezogene Dateien
+.idea/
+.vscode/
 .settings/
+*.swp
+
+# Daten
+datasets/raw/
+datasets/*_cleaned.csv
+
+# Logs und temporäre Dateien
+logs/
+*.tmp
 
 # Executables
 *.swf
@@ -13,6 +45,6 @@ bin-release/
 *.ipa
 *.apk
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Hinweis: Projektdateien wie `.project`, `.actionScriptProperties`, `.flexProperties`
+# sollten NICHT ausgeschlossen werden, da sie wichtige Compiler-Einstellungen
+# und andere relevante Informationen enthalten.

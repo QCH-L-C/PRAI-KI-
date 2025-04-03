@@ -1,0 +1,19 @@
+name: Lint Code
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Flake8
+        run: pip install flake8
+
+      - name: Run Linter
+        run: flake8 .

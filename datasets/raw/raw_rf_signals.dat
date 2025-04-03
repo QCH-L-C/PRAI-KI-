@@ -1,0 +1,43 @@
+Die Datei enthält Werte im Rohformat, ideal für Simulationen oder Vorverarbeitungsschritte.
+
+# raw_rf_signals.dat
+# Rohdaten für RF-Signale
+# Spalten: Zeit (s), Signalwert (Amplitude)
+
+0.000001, 0.01256
+0.000002, 0.02512
+0.000003, 0.03768
+0.000004, 0.05023
+0.000005, 0.06279
+0.000006, 0.07535
+0.000007, 0.08791
+0.000008, 0.10047
+0.000009, 0.11299
+0.000010, 0.12533
+0.000011, 0.13757
+0.000012, 0.14975
+0.000013, 0.16178
+0.000014, 0.17364
+0.000015, 0.18525
+0.000016, 0.19664
+0.000017, 0.20779
+0.000018, 0.21867
+0.000019, 0.22923
+0.000020, 0.23955
+Datei-Format
+Header:
+
+Zeilen, die mit # beginnen, sind Kommentare und beschreiben den Zweck der Datei.
+
+Daten:
+
+Jede Zeile enthält zwei Werte:
+
+Zeit (in Sekunden): Zeitstempel des Signals.
+
+Signalwert (Amplitude): Der Amplitudenwert des RF-Signals zu diesem Zeitpunkt.
+
+Verwendung
+Input für Simulationen: Die Werte können direkt in Programmen gelesen werden, um Signalverarbeitung oder optische Simulationen durchzuführen.
+
+Testfälle: Rohdaten dienen als Grundlage für die Validierung von Signalverarbeitungssystemen.

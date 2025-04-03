@@ -1,0 +1,10 @@
+      - name: Build Docker Image
+        run: |
+          docker build -t prai-image .
+      - name: Push Docker Image to Registry
+        run: |
+          docker tag prai-image your-dockerhub-repo/prai-image:latest
+          docker push your-dockerhub-repo/prai-image:latest
+      - name: Deploy Container to Server
+        run: |
+          ssh user@your-server "docker pull your-dockerhub-repo/prai-image:latest && docker run -d -p 5000:5000 prai-image"

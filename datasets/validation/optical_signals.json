@@ -1,0 +1,97 @@
+Die JSON-Datei enthält simulierte Daten für optische Signale und ihre Eigenschaften, um die Ergebnisse der optischen Simulation und KI-Vorhersagen zu validieren.
+
+json
+{
+    "validation_signals": [
+        {
+            "signal_id": 1,
+            "frequency": 1500000,
+            "amplitude": 0.8,
+            "optical_constant": 1.4,
+            "duration": 0.01,
+            "sampling_rate": 1000000,
+            "expected_energy": 0.56,
+            "expected_properties": {
+                "mean": 0.45,
+                "std_dev": 0.38,
+                "max": 0.8,
+                "min": -0.8
+            }
+        },
+        {
+            "signal_id": 2,
+            "frequency": 2000000,
+            "amplitude": 1.2,
+            "optical_constant": 1.6,
+            "duration": 0.012,
+            "sampling_rate": 1500000,
+            "expected_energy": 1.15,
+            "expected_properties": {
+                "mean": 0.6,
+                "std_dev": 0.52,
+                "max": 1.2,
+                "min": -1.2
+            }
+        },
+        {
+            "signal_id": 3,
+            "frequency": 1800000,
+            "amplitude": 1.0,
+            "optical_constant": 1.3,
+            "duration": 0.008,
+            "sampling_rate": 1200000,
+            "expected_energy": 0.78,
+            "expected_properties": {
+                "mean": 0.5,
+                "std_dev": 0.40,
+                "max": 1.0,
+                "min": -1.0
+            }
+        },
+        {
+            "signal_id": 4,
+            "frequency": 2200000,
+            "amplitude": 0.9,
+            "optical_constant": 1.5,
+            "duration": 0.015,
+            "sampling_rate": 1800000,
+            "expected_energy": 1.02,
+            "expected_properties": {
+                "mean": 0.55,
+                "std_dev": 0.45,
+                "max": 0.9,
+                "min": -0.9
+            }
+        }
+    ]
+}
+
+Beschreibung der Felder
+signal_id: Eindeutige ID des Signals zur Identifizierung.
+
+frequency: Frequenz des optischen Signals in Hz.
+
+amplitude: Amplitude des optischen Signals.
+
+optical_constant: Optische Konstante oder Brechungsindex des Mediums.
+
+duration: Dauer des Signals in Sekunden.
+
+sampling_rate: Abtastrate des Signals in Hz.
+
+expected_energy: Erwartete Energie des Signals, berechnet durch die Simulation.
+
+expected_properties: Validierungseigenschaften des Signals:
+
+mean: Erwarteter Mittelwert der Signalwerte.
+
+std_dev: Erwartete Standardabweichung.
+
+max: Maximalwert des Signals.
+
+min: Minimalwert des Signals.
+
+Verwendung
+Validierung der Simulation: Diese Daten können verwendet werden, um die Ergebnisse der optischen Wechselwirkungen und Berechnungen zu testen.
+
+KI-Test: Die Validierungssignale bieten eine Grundlage, um die Vorhersagen des neuronalen Netzwerks zu überprüfen.
