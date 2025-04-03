@@ -24,3 +24,17 @@ dwg.add(dwg.line(start=(500, 200), end=(550, 200), stroke='black', stroke_width=
 # Speichere die Datei
 dwg.save()
 print("Das Diagramm wurde als rf_optical_flow.svg gespeichert.")
+
+
+Anleitung zur Ausführung:
+Python-Umgebung einrichten:
+
+Installiere die erforderlichen Bibliotheken:
+
+bash
+pip install pillow svgwrite
+Code ausführen:
+
+Speichere die Skripte und führe sie in Deiner Python-Umgebung aus.
+
+rf_optical_flow.svg: Ein Diagramm, das den Workflow zwischen RF-Signal, optischer Interaktion und KI-Verarbeitung zeigt.
