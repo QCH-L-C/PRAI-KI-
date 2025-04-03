@@ -1,0 +1,50 @@
+Architektur der PRAI Blue Deep Gold KI
+Datenebene:
+
+Input-Daten: RF-Signale, optische Simulationen, physikalische Parameter.
+
+Datenvorverarbeitung:
+
+Normalisierung der Eingangsdaten.
+
+Feature-Extraktion (wichtige Muster aus den RF-Signalen erkennen).
+
+Datenspeicherung:
+
+Speicherung in strukturierten Datensätzen (z. B. Datenbanken oder .csv-Dateien).
+
+KI-Kern:
+
+Neuronales Netzwerk:
+
+Input-Layer: Verarbeitung der vorverarbeiteten Daten.
+
+Hidden-Layers: Mustererkennung und Berechnung physikalischer Vorhersagen.
+
+Output-Layer: Ergebnisse (z. B. Wahrscheinlichkeiten oder physikalische Parameter).
+
+Model-Management:
+
+Training und Validierung.
+
+Optimierung der Architektur.
+
+Anwendungsebene:
+
+REST-API:
+
+Zugriff auf Vorhersagen und Analysen.
+
+UI-Komponente:
+
+Interaktive Chatbox für Benutzerkommunikation.
+
+Automatisierungsskripte:
+
+Datenimport, Signalberechnung und Deployment.
+
+System-Integration:
+
+Kommunikation zwischen Komponenten:
+
+RF-Signalmodule → KI → API → Benutzeroberfläche.
