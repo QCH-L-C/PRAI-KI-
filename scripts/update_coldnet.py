@@ -89,3 +89,34 @@ if __name__ == "__main__":
         # Verbindung schließen
         connection.close()
         print("Datenbankverbindung geschlossen.")
+
+Beschreibung der Funktionen
+connect_to_database:
+
+Erstellt oder verbindet sich mit der ColdNet-Datenbank.
+
+Standardpfad: database/coldnet.db.
+
+create_table:
+
+Erstellt die Tabelle coldnet_storage, falls sie noch nicht existiert.
+
+Spalten:
+
+id: Primärschlüssel.
+
+key: Schlüssel des Datensatzes.
+
+value: Wert des Datensatzes.
+
+timestamp: Zeitstempel des Eintrags.
+
+insert_data:
+
+Fügt einen neuen Datensatz in die Tabelle ein.
+
+Beispiel: insert_data(connection, "TestKey", "TestValue").
+
+fetch_all_data:
+
+Ruft alle Datensätze aus der Datenbank ab und druckt sie.
