@@ -16,3 +16,11 @@ echo "Starte PRAI..."
 python main.py
 
 echo "Deployment abgeschlossen! Besuche die URL: http://127.0.0.1:5000"
+
+Hinweise
+Berechtigungen: Stelle sicher, dass die .sh-Dateien ausführbar sind:
+
+bash
+chmod +x scripts/train_model.sh
+chmod +x scripts/deploy_prai.sh
+Ordnerstruktur: Platziere die Dateien im scripts/-Ordner und führe sie entsprechend aus.
