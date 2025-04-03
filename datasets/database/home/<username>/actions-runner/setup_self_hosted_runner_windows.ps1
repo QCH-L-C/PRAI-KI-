@@ -3,6 +3,7 @@ $repoUrl = "https://github.com/QCH-L-C/PRAI-KI-"
 $token = "BKELILVAGZ6V5FVWE7TIJDDH54T2Y"
 $runnerVersion = "2.323.0"
 $runnerFolder = "C:\actions-runner"
+$sandboxPort = 8080
 
 # Verzeichnis erstellen
 Write-Host "Erstelle Verzeichnis für GitHub Actions Runner..."
@@ -25,16 +26,30 @@ Write-Host "Extrahiere Dateien..."
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD\actions-runner-win-x64-$runnerVersion.zip", "$PWD")
 
-# USB und Netzwerk konfigurieren
-Write-Host "Ermögliche USB-/Netzwerk-Integration..."
-Write-Output "Platzhalter: USB-Geräte (bereits eingehängt)."
-
 # Runner konfigurieren
 Write-Host "Konfiguriere Runner..."
 .\config.cmd --url $repoUrl --token $token
 
-# Runner starten
-Write-Host "Starte den Runner..."
-.\run.cmd
+# Sandbox-Funktion hinzufügen
+Write-Host "Starte Sandbox für PRAI Website..."
+Install-Package -Name python -Force
+pip install flask
+Set-Content -Path sandbox_website.py -Value @"
+from flask import Flask, render_template
+app = Flask(__name__)
 
-Write-Host "Windows Runner erfolgreich konfiguriert (inkl. USB-Support)."
+@app.route("/")
+def home():
+    return "<h1>Willkommen in der PRAI-Sandbox</h1><p>Verbunden mit Deinem Repository!</p>"
+
+@app.route("/chat")
+def chat():
+    return "<h2>PRAI Chatbox</h2><textarea placeholder='Frag mich etwas...'></textarea>"
+
+if __name__ == "__main__":
+    app.run(port=$sandboxPort)
+"@
+
+python sandbox_website.py &
+
+Write-Host "Windows Runner erfolgreich eingerichtet mit einer PRAI-Sandbox Website!"
