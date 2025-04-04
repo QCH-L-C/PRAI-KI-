@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandbox – ColdNet & WarmNet</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Willkommen in der Sandbox</h1>
+        <p>Visualisiere und bearbeite Daten in ColdNet und WarmNet.</p>
+    </header>
+    <main>
+        <section>
+            <h2>ColdNet</h2>
+            <div id="coldnet-data"></div>
+            <button onclick="loadData('cold')">Daten laden</button>
+        </section>
+        <section>
+            <h2>WarmNet</h2>
+            <div id="warmnet-data"></div>
+            <button onclick="loadData('warm')">Daten laden</button>
+        </section>
+        <script src="/static/scripts.js"></script>
+    </main>
+</body>
+</html>
