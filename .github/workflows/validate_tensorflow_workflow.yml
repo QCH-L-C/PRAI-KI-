@@ -24,12 +24,32 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+        run: |
+          python -m pip install --upgrade pip
 
       - name: Install Dependencies
         run: |
+          # Überprüfen der Kompatibilität der requirements.txt
+          if grep -q "tensorflow==" requirements.txt; then
+            echo "Requirements enthalten TensorFlow. Validierung wird fortgesetzt."
+          else
+            echo "WARNUNG: TensorFlow fehlt in requirements.txt. Bitte prüfen."
+            exit 1
+          fi
+
+          # Installation der Abhängigkeiten
           pip install -r requirements.txt
 
       - name: Verify TensorFlow Installation
         run: |
+          # Überprüfen der TensorFlow-Installation
           python -c "import tensorflow as tf; print('TensorFlow-Version:', tf.__version__)"
+          if [ $? -ne 0 ]; then
+            echo "TensorFlow konnte nicht importiert werden. Bitte prüfen."
+            exit 1
+          fi
+
+      - name: Display Installed Packages
+        run: |
+          echo "Installierte Python-Pakete:"
+          pip list
