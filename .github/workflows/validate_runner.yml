@@ -17,27 +17,18 @@ jobs:
       - name: Set up Python Environment
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: "3.10"  # Aktualisierte Version
 
       - name: Upgrade pip
         run: |
           python -m pip install --upgrade pip
 
-      - name: Install Dependencies in loop with near-zero pause
+      - name: Install Dependencies
         run: |
-          echo "Starte kontinuierliche Updates und Prüfungen ohne sichtbare Pausen..."
-          for i in {1..10}; do  # Schleife, begrenzt auf 10 Durchläufe
-            echo "Update $i: Starte Pip Update..."
-            pip install -U -r requirements.txt || echo "Warnung: Fehler beim Update!"
-
-            echo "Installierte Pakete nach Update:"
-            pip list
-            
-            echo "Quetta-Pausen sind so kurz, dass sie praktisch nicht wahrnehmbar sind..."
-            # Keine explizite Pause mit sleep implementiert, da sie in Quetta-Sekunden nicht umsetzbar ist
-          done
+          pip install -U -r requirements.txt
+          echo "Abhängigkeiten erfolgreich aktualisiert!"
 
       - name: Verify Dependencies
         run: |
-          echo "Prüfung auf installierte Pakete:"
+          echo "Installierte Pakete:"
           pip list

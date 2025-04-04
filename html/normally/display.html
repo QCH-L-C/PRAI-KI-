@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAI Blue Deep Gold KI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #0078d7;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #343a40;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+        }
+        #chatbox {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: white;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #0078d7;
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PRAI Blue Deep Gold KI - Automatisierte Webplattform</h1>
+    </header>
+    <nav>
+        <a href="#overview">Übersicht</a>
+        <a href="#chatbox">Chatbox</a>
+        <a href="#google">Google-Schnittstelle</a>
+    </nav>
+    <main>
+        <section id="overview">
+            <h2>Projektübersicht</h2>
+            <p>Dieses Projekt verbindet das PRAI KI-Programm mit automatisierten Webinteraktionen und einer gewichteten Analyse (.weight).</p>
+        </section>
+        <section id="chatbox">
+            <h2>Chatbox</h2>
+            <div id="chatbox">
+                <p>Willkommen in der PRAI Chatbox. Hier kannst du Nachrichten senden.</p>
+                <textarea id="userInput" rows="4" cols="50" placeholder="Gib deine Nachricht ein..."></textarea><br>
+                <button onclick="handleChat()">Senden</button>
+                <div id="response"></div>
+            </div>
+        </section>
+        <section id="google">
+            <h2>Automatische Google-Schnittstelle</h2>
+            <p>Der Google-Link wird automatisch vom PRAI-Programm angeklickt und verarbeitet.</p>
+            <a id="googleLink" href="https://www.google.com" target="_blank">Google öffnen</a>
+            <p id="googleStatus" class="hidden">Google wurde erfolgreich aufgerufen!</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 PRAI Blue Deep Gold KI - Erstellt von @Satoramy</p>
+    </footer>
+    <script>
+        // Funktion zur Automatisierung der Interaktion
+        window.onload = function() {
+            // Automatisches Klicken auf den Google-Link
+            const googleLink = document.getElementById('googleLink');
+            googleLink.click();
+            document.getElementById('googleStatus').classList.remove('hidden');
+        };
+
+        // Funktion für Chatbox-Interaktion
+        function handleChat() {
+            const userInput = document.getElementById('userInput').value;
+            const responseDiv = document.getElementById('response');
+            responseDiv.innerHTML = `<p><strong>PRAI:</strong> Ich habe deine Nachricht verarbeitet: "${userInput}"</p>`;
+        }
+    </script>
+</body>
+</html>

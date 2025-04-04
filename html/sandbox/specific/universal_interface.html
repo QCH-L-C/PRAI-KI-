@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAI Universal Interface</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+        header {
+            text-align: center;
+            background-color: #0078d7;
+            color: white;
+            padding: 20px 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #1f1f1f;
+            padding: 10px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #f5f5f5;
+            text-decoration: none;
+        }
+        main {
+            padding: 20px;
+        }
+        .module {
+            border: 1px solid #555;
+            padding: 20px;
+            margin: 10px auto;
+            max-width: 800px;
+            background-color: #222;
+            border-radius: 5px;
+        }
+        #qubit-display {
+            font-size: 1.2em;
+            text-align: center;
+            margin: 20px 0;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #0078d7;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PRAI Blue Deep Gold KI: Die Zukunft der Technologie</h1>
+    </header>
+    <nav>
+        <a href="#overview">Übersicht</a>
+        <a href="#qubits">Quantenphysik</a>
+        <a href="#mobile">Mobile Apps</a>
+        <a href="#runner">Self-Hosted Runner</a>
+    </nav>
+    <main>
+        <section id="overview" class="module">
+            <h2>Projektübersicht</h2>
+            <p>Die PRAI-Plattform vereint die neuesten Technologien wie Quantenphysik, RF-Signale, optische Technologien und mobile Integrationen.</p>
+        </section>
+        <section id="qubits" class="module">
+            <h2>Quantenphysik und Time Crystals</h2>
+            <p>Simulation von Qubit-Zuständen und Lichtfrequenzen:</p>
+            <div id="qubit-display">
+                Qubit-Zustand: Superposition | Wellenfrequenz: 300 THz
+            </div>
+        </section>
+        <section id="mobile" class="module">
+            <h2>Mobile Apps Integration</h2>
+            <p>Die Weboberfläche ist als mobile App auf Android und iOS verfügbar.</p>
+            <p><strong>Download:</strong></p>
+            <ul>
+                <li><a href="https://play.google.com" target="_blank">Google Play Store</a></li>
+                <li><a href="https://www.apple.com/app-store/" target="_blank">Apple App Store</a></li>
+            </ul>
+        </section>
+        <section id="runner" class="module">
+            <h2>Self-Hosted Runner Integration</h2>
+            <p>Unterstützung für Mac, Linux und Windows:</p>
+            <pre>
+./config.sh --url <repository_url> --token <generated_token>
+./run.sh
+./svc.sh install
+./svc.sh start
+            </pre>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 PRAI Universal Interface - Erstellt von @Satoramy</p>
+    </footer>
+    <script>
+        // Qubit-Zustand automatisch aktualisieren
+        setInterval(() => {
+            const qubitDisplay = document.getElementById('qubit-display');
+            const randomFrequency = Math.random() * 1000;
+            qubitDisplay.innerHTML = `Qubit-Zustand: Superposition | Wellenfrequenz: ${randomFrequency.toFixed(2)} THz`;
+        }, 3000);
+    </script>
+</body>
+</html>
