@@ -1,0 +1,35 @@
+# SSH Server Konfigurationsdatei
+
+# Port und Protokollversion
+Port 22
+Protocol 2
+
+# Authentifizierung
+PermitRootLogin no
+PubkeyAuthentication yes
+PasswordAuthentication no
+
+# Host-Schlüssel
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# Logging
+SyslogFacility AUTH
+LogLevel INFO
+
+# Maximale Sicherheit
+MaxAuthTries 3
+PermitEmptyPasswords no
+
+# Einstellungen für Clients
+ClientAliveInterval 300
+ClientAliveCountMax 2
+
+# Key Exchange und Verschlüsselung
+KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+Ciphers aes256-ctr,aes256-gcm@openssh.com,chacha20-poly1305@openssh.com
+MACs hmac-sha2-512,hmac-sha2-256
+
+# Zugriffsbeschränkungen
+AllowUsers user1 user2
+DenyUsers testuser
