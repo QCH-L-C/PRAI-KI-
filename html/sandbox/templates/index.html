@@ -68,3 +68,26 @@
     </script>
 </body>
 </html>
+
+
+###Erklärung der Datei:
+Kopfbereich (Header): Der Header begrüßt den Benutzer und erklärt, dass diese Seite zwei Hauptbereiche kombiniert:
+
+Eine interaktive Sandbox zur Anzeige und Bearbeitung von ColdNet‑ und WarmNet‑Daten.
+
+Eine Statusanzeige der PRAI‑Website, die den aktiven Link (von den Backup‑Funktionen) darstellt.
+
+Zusätzlich einen Bereich für DNS‑Diagnose, der über AJAX alternative Links ausgibt (falls beispielsweise rfof-network.org nicht erreichbar ist).
+
+Sandbox-Bereich: Zwei separate Abschnitte (für ColdNet und WarmNet) enthalten Platzhalter-Divs, in denen mittels JavaScript (über den Aufruf der Funktion loadData(storageType)) Daten geladen und angezeigt werden können.
+
+PRAI‑Status-Bereich: Dieser Abschnitt zeigt den aktiven Link, der via Flask (Variable {{ link }}) dynamisch generiert wird, sowie einen simplen Statustext (z. B. "Die Website läuft einwandfrei").
+
+DNS Diagnose & Backup Links: Ein eigener Abschnitt, in dem über einen AJAX-Call (an den Endpunkt /dns_status) die Ergebnisse der DNS‑Diagnose angezeigt werden. Dort können alternative Links bereitgestellt werden, falls die Hauptdomain nicht erreichbar ist.
+
+Externe Stylesheets und JavaScript: Das Template bindet die gemeinsamen CSS‑Datei (/static/styles.css) und JavaScript (/static/scripts.js) ein, um das Erscheinungsbild und die Funktionalität zentral zu steuern. Die JavaScript-Datei enthält die Funktion loadData(), die die Sandbox interaktiv macht.
+
+Integration in Dein Projekt:
+Flask-Backend: In Deinem Flask‑Server (z. B. app.py) wird diese Datei als Template geladen. Dadurch fließt die Variable {{ link }} in den Header ein, sodass immer der aktuell aktive Link angezeigt wird (dies erfolgt über den Code in Deinem "website_link_manager" und DNS‑Diagnose‑Funktionen).
+
+Weitere Backend-Endpunkte: Ein zusätzlicher Endpoint /dns_status sollte in Deinem Flask‑Server implementiert sein, um JSON-Daten für die DNS-Diagnose zu liefern (entsprechend dem Code in dns_diagnosis.py bzw. einer angepassten Version).
