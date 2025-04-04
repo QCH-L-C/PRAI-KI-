@@ -1,0 +1,9 @@
+{
+  "name": "your-project",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'Build-Step läuft' && exit 0",
+    "test": "echo 'Test läuft' && exit 0"
+  },
+  "dependencies": {}
+}
