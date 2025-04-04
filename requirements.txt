@@ -1,7 +1,6 @@
-# Diese Datei enthält die Python-Abhängigkeiten für dein Projekt.
-# Python-Abhängigkeiten für Self-Hosted Runner und Sandbox
+# Diese Datei enthält die Python-Abhängigkeiten für das Projekt.
 Flask==2.2.3
-tensorflow==2.18.0
+tensorflow==2.18.0  # Kompatible Version von TensorFlow
 numpy==1.24.2
 pandas==1.5.3
 svgwrite==1.4.1
