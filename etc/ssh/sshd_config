@@ -33,3 +33,10 @@ MACs hmac-sha2-512,hmac-sha2-256
 # Zugriffsbeschränkungen
 AllowUsers user1 user2
 DenyUsers testuser
+
+ls -l /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_ed25519_key
+
+sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ""
+sudo ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
+
+sudo systemctl restart sshd
