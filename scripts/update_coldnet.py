@@ -1,122 +1,46 @@
+#!/usr/bin/env python3
 import sqlite3
 from datetime import datetime
 
 def connect_to_database(db_path="database/coldnet.db"):
-    """
-    Stellt eine Verbindung zur ColdNet-Datenbank her oder erstellt sie, falls sie nicht existiert.
-    :param db_path: Der Pfad zur Datenbankdatei.
-    :return: Verbindung zur Datenbank.
-    """
+    """Stellt eine Verbindung zur ColdNet-Datenbank her."""
     try:
         conn = sqlite3.connect(db_path)
-        print(f"Verbunden mit der Datenbank: {db_path}")
+        print(f"Verbindung zur Datenbank {db_path} erfolgreich.")
         return conn
     except sqlite3.Error as e:
-        print(f"Fehler beim Verbinden mit der Datenbank: {e}")
+        print(f"Fehler bei der Verbindung: {e}")
         return None
 
 def create_table(conn):
-    """
-    Erstellt die Tabelle für den ColdNet-Datenspeicher, falls sie nicht existiert.
-    :param conn: Verbindung zur Datenbank.
-    """
-    try:
-        cursor = conn.cursor()
-        cursor.execute("""
-        CREATE TABLE IF NOT EXISTS coldnet_storage (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            key TEXT NOT NULL,
-            value TEXT NOT NULL,
-            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-        );
-        """)
-        conn.commit()
-        print("Tabelle 'coldnet_storage' erstellt oder existiert bereits.")
-    except sqlite3.Error as e:
-        print(f"Fehler beim Erstellen der Tabelle: {e}")
+    """Erstellt die Tabelle für den ColdNet-Datenspeicher, falls nicht vorhanden."""
+    cursor = conn.cursor()
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS coldnet_storage (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        key TEXT NOT NULL,
+        value TEXT NOT NULL,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+    conn.commit()
+    print("Tabelle 'coldnet_storage' ist vorhanden.")
 
 def insert_data(conn, key, value):
-    """
-    Fügt neue Daten in die Tabelle ein.
-    :param conn: Verbindung zur Datenbank.
-    :param key: Schlüssel für den Datensatz.
-    :param value: Wert des Datensatzes.
-    """
-    try:
-        cursor = conn.cursor()
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        cursor.execute("""
-        INSERT INTO coldnet_storage (key, value, timestamp)
-        VALUES (?, ?, ?);
-        """, (key, value, timestamp))
-        conn.commit()
-        print(f"Daten erfolgreich eingefügt: {key} -> {value}")
-    except sqlite3.Error as e:
-        print(f"Fehler beim Einfügen der Daten: {e}")
-
-def fetch_all_data(conn):
-    """
-    Ruft alle Daten aus der Tabelle ab.
-    :param conn: Verbindung zur Datenbank.
-    :return: Liste aller Datensätze.
-    """
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM coldnet_storage;")
-        rows = cursor.fetchall()
-        for row in rows:
-            print(row)
-        return rows
-    except sqlite3.Error as e:
-        print(f"Fehler beim Abrufen der Daten: {e}")
-        return []
+    """Fügt einen neuen Datensatz in die Tabelle ein."""
+    cursor = conn.cursor()
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    cursor.execute("""
+    INSERT INTO coldnet_storage (key, value, timestamp)
+    VALUES (?, ?, ?);
+    """, (key, value, timestamp))
+    conn.commit()
+    print(f"Eintrag hinzugefügt: {key} -> {value}")
 
 if __name__ == "__main__":
-    # Verbindung zur Datenbank herstellen
     connection = connect_to_database()
-
     if connection:
-        # Tabelle erstellen
         create_table(connection)
-
-        # Beispiel: Daten einfügen
-        insert_data(connection, "Example_Key", "This is an example value.")
-
-        # Beispiel: Alle Daten abrufen
-        print("Alle Daten in der ColdNet-Datenbank:")
-        fetch_all_data(connection)
-
-        # Verbindung schließen
+        insert_data(connection, "Example_Key", "Dies ist ein Beispielwert.")
         connection.close()
         print("Datenbankverbindung geschlossen.")
-
-Beschreibung der Funktionen
-connect_to_database:
-
-Erstellt oder verbindet sich mit der ColdNet-Datenbank.
-
-Standardpfad: database/coldnet.db.
-
-create_table:
-
-Erstellt die Tabelle coldnet_storage, falls sie noch nicht existiert.
-
-Spalten:
-
-id: Primärschlüssel.
-
-key: Schlüssel des Datensatzes.
-
-value: Wert des Datensatzes.
-
-timestamp: Zeitstempel des Eintrags.
-
-insert_data:
-
-Fügt einen neuen Datensatz in die Tabelle ein.
-
-Beispiel: insert_data(connection, "TestKey", "TestValue").
-
-fetch_all_data:
-
-Ruft alle Datensätze aus der Datenbank ab und druckt sie.

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAI Platform – Sandbox & Status</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Willkommen bei der PRAI Platform</h1>
+        <p>
+            Diese Seite kombiniert die interaktive Sandbox für ColdNet/WarmNet-Daten mit dem PRAI-Website‑Status.
+            Zusätzlich wird eine DNS‑Diagnose durchgeführt, um alternative Backup‑Links anzuzeigen, falls die Hauptdomain nicht erreichbar ist.
+        </p>
+    </header>
+    <main>
+        <!-- Bereich: ColdNet & WarmNet Sandbox -->
+        <section id="sandbox-section">
+            <h2>Sandbox – ColdNet & WarmNet</h2>
+            <div class="sandbox-container">
+                <div class="storage-section" id="coldnet-section">
+                    <h3>ColdNet Daten</h3>
+                    <div id="coldnet-data"></div>
+                    <button onclick="loadData('cold')">Lade ColdNet Daten</button>
+                </div>
+                <div class="storage-section" id="warmnet-section">
+                    <h3>WarmNet Daten</h3>
+                    <div id="warmnet-data"></div>
+                    <button onclick="loadData('warm')">Lade WarmNet Daten</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bereich: PRAI Website Status -->
+        <section id="status-section">
+            <h2>PRAI Website Status</h2>
+            <p>Aktiver Link: {{ link }}</p>
+            <p>Status: Die Website läuft einwandfrei.</p>
+        </section>
+
+        <!-- Bereich: DNS Diagnose & Backup Links -->
+        <section id="dns-section">
+            <h2>DNS Diagnose & Backup Links</h2>
+            <p>
+                Falls die Hauptdomain (rfof-network.org) nicht erreichbar ist, werden alternative Links genutzt.
+                Hier erfolgt eine automatische Überprüfung und Anzeige der DNS‑Diagnose.
+            </p>
+            <div id="dns-results">
+                <!-- Die aktuellen DNS-Ergebnisse werden per AJAX geladen -->
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/scripts.js"></script>
+    <script>
+        // Zusätzlicher AJAX-Call zum Laden der DNS-Diagnoseergebnisse
+        fetch('/dns_status')
+          .then(response => response.json())
+          .then(data => {
+             const dnsDiv = document.getElementById('dns-results');
+             dnsDiv.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+          })
+          .catch(error => {
+             console.error("DNS Diagnose konnte nicht geladen werden: ", error);
+             document.getElementById('dns-results').innerText = "Fehler beim Laden der DNS-Diagnose.";
+          });
+    </script>
+</body>
+</html>

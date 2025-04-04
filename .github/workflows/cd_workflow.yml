@@ -1,0 +1,46 @@
+name: CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Validate Python Environment
+        run: |
+          echo "Überprüfe Python-Installation..."
+          python3 --version || echo "Python nicht installiert!"
+          pip3 --version || echo "Pip nicht installiert!"
+
+      - name: Check DNS Resolution
+        run: |
+          echo "Überprüfe DNS-Auflösung..."
+          if ! getent hosts <actual-server-hostname-or-ip>; then
+            echo "DNS resolution failed for <actual-server-hostname-or-ip>"
+            exit 1
+          fi
+
+      - name: Deploy Application
+        run: |
+          echo "Starte Deployment mit SSH und Passenger..."
+          for i in {1..5}; do
+            if ssh user@<actual-server-hostname-or-ip> "cd /path/to/app && git pull && passenger restart"; then
+              echo "Deployment erfolgreich!"
+              break
+            else
+              echo "SSH-Verbindung fehlgeschlagen, neuer Versuch in 5 Sekunden..."
+              sleep 5
+            fi
+          done
+
+      - name: Debug Deployment Logs
+        run: |
+          echo "Analyse der Deployment-Logs..."
+          tail -n 50 /path/to/logs/deployment.log || echo "Log-Datei nicht gefunden!"
