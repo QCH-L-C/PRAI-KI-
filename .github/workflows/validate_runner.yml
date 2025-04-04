@@ -1,62 +1,14 @@
-name: Validate Self-Hosted Runner
+name: Auto Update and Validate Dependencies
 
 on:
   workflow_dispatch:
 
 jobs:
-  validate-runner:
-    runs-on: self-hosted
-
-    steps:
-      # Schritt 1: Überprüfen der Python-Installation
-      - name: Validate Python Environment
-        run: |
-          echo "Überprüfen der Python-Installation..."
-          python3 --version || echo "Python ist nicht installiert!"
-          pip3 --version || echo "Pip ist nicht installiert!"
-
-      # Schritt 2: Runner-Dienste überprüfen
-      - name: Validate Runner Services
-        run: |
-          echo "Überprüfen, ob der Runner-Dienst aktiv ist..."
-          ps aux | grep actions-runner || echo "Self-Hosted Runner ist nicht aktiv!"
-
-      # Schritt 3: Debug-Tools installieren
-      - name: Install Debug Tools
-        run: |
-          sudo apt-get update && sudo apt-get install -y net-tools
-          echo "Debug-Tools installiert."
-
-
-name: Validate Runner Setup
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-
-jobs:
-  validate-runner:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out Repository
-        uses: actions/checkout@v3
-
-      - name: Validate Runner Logs
-        run: |
-          python home/<username>/actions-runner/debug_runner_logs.py
-
-
-name: Auto Update Dependencies
-
-on:
-  workflow_dispatch: # Manuelles Starten des Workflows möglich
-
-jobs:
-  update-dependencies:
-    runs-on: ubuntu-latest
+  auto-update-dependencies:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]  # Unterstützte Plattformen
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Check out Repository
@@ -67,22 +19,25 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Start Continuous Updates
+      - name: Upgrade pip
         run: |
-          echo "Starte kontinuierliche Updates der Abhängigkeiten..."
-          while true; do
-            echo "Update-Prozess gestartet..."
-            
-            # Upgrade pip
-            python -m pip install --upgrade pip
-            
-            # Installiere Abhängigkeiten
-            pip install -U -r requirements.txt
-            echo "Abhängigkeiten erfolgreich aktualisiert!"
-            
-            # Liste installierte Pakete auf
+          python -m pip install --upgrade pip
+
+      - name: Install Dependencies in loop with near-zero pause
+        run: |
+          echo "Starte kontinuierliche Updates und Prüfungen ohne sichtbare Pausen..."
+          for i in {1..10}; do  # Schleife, begrenzt auf 10 Durchläufe
+            echo "Update $i: Starte Pip Update..."
+            pip install -U -r requirements.txt || echo "Warnung: Fehler beim Update!"
+
+            echo "Installierte Pakete nach Update:"
             pip list
             
-            echo "Warte 30 Sekunden auf den nächsten Lauf..."
-            sleep 30
+            echo "Quetta-Pausen sind so kurz, dass sie praktisch nicht wahrnehmbar sind..."
+            # Keine explizite Pause mit sleep implementiert, da sie in Quetta-Sekunden nicht umsetzbar ist
           done
+
+      - name: Verify Dependencies
+        run: |
+          echo "Prüfung auf installierte Pakete:"
+          pip list
