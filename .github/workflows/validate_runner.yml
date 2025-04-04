@@ -47,3 +47,42 @@ jobs:
       - name: Validate Runner Logs
         run: |
           python home/<username>/actions-runner/debug_runner_logs.py
+
+
+name: Auto Update Dependencies
+
+on:
+  workflow_dispatch: # Manuelles Starten des Workflows möglich
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python Environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Start Continuous Updates
+        run: |
+          echo "Starte kontinuierliche Updates der Abhängigkeiten..."
+          while true; do
+            echo "Update-Prozess gestartet..."
+            
+            # Upgrade pip
+            python -m pip install --upgrade pip
+            
+            # Installiere Abhängigkeiten
+            pip install -U -r requirements.txt
+            echo "Abhängigkeiten erfolgreich aktualisiert!"
+            
+            # Liste installierte Pakete auf
+            pip list
+            
+            echo "Warte 30 Sekunden auf den nächsten Lauf..."
+            sleep 30
+          done
