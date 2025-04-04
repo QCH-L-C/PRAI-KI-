@@ -26,3 +26,24 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y net-tools
           echo "Debug-Tools installiert."
+
+
+name: Validate Runner Setup
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  validate-runner:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Repository
+        uses: actions/checkout@v3
+
+      - name: Validate Runner Logs
+        run: |
+          python home/<username>/actions-runner/debug_runner_logs.py
