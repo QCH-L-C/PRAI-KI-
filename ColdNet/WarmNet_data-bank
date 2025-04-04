@@ -1,0 +1,91 @@
+from cryptography.fernet import Fernet
+import sqlite3
+
+class ColdNet/WarmNetDataBank:
+    def __init__(self):
+        self.database_path = "data_bank.db"
+        self.cipher_suite = self._initialize_cipher()
+        self.connection = self._initialize_database()
+
+    def _initialize_cipher(self):
+        """Lädt oder generiert den Verschlüsselungsschlüssel."""
+        try:
+            with open("data_bank.key", "rb") as key_file:
+                return Fernet(key_file.read())
+        except FileNotFoundError:
+            key = Fernet.generate_key()
+            with open("data_bank.key", "wb") as key_file:
+                key_file.write(key)
+            return Fernet(key)
+
+    def _initialize_database(self):
+        """Initialisiert die ColdNet/WarmNet-Datenbank."""
+        connection = sqlite3.connect(self.database_path)
+        cursor = connection.cursor()
+        # ColdNet Tabelle
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS cold_storage (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            key TEXT NOT NULL,
+            encrypted_value TEXT NOT NULL,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+        """)
+        # WarmNet Tabelle
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS warm_storage (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            key TEXT NOT NULL,
+            encrypted_value TEXT NOT NULL,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+        """)
+        connection.commit()
+        return connection
+
+    def store_data(self, storage_type, key, value, user):
+        """Speichert Daten in ColdNet oder WarmNet."""
+        if user.lower() != "satoramy":
+            raise PermissionError("Zugriff verweigert! Nur 'Satoramy' darf Änderungen vornehmen.")
+        encrypted_value = self.cipher_suite.encrypt(value.encode())
+        cursor = self.connection.cursor()
+        cursor.execute(f"""
+        INSERT INTO {storage_type}_storage (key, encrypted_value) VALUES (?, ?);
+        """, (key, encrypted_value))
+        self.connection.commit()
+        print(f"Erfolgreich gespeichert: {key} -> {value} in {storage_type.capitalize()}Net.")
+
+    def retrieve_data(self, storage_type, user):
+        """Ruft Daten aus ColdNet oder WarmNet ab."""
+        if user.lower() != "satoramy":
+            raise PermissionError("Zugriff verweigert! Nur 'Satoramy' darf Daten abrufen.")
+        cursor = self.connection.cursor()
+        cursor.execute(f"SELECT key, encrypted_value, timestamp FROM {storage_type}_storage;")
+        results = cursor.fetchall()
+        decrypted_results = []
+        for row in results:
+            decrypted_results.append({
+                "key": row[0],
+                "value": self.cipher_suite.decrypt(row[1]).decode(),
+                "timestamp": row[2]
+            })
+        return decrypted_results
+
+    def close_connection(self):
+        """Schließt die Datenbankverbindung."""
+        self.connection.close()
+        print("Verbindung geschlossen.")
+
+# Beispielanwendung
+if __name__ == "__main__":
+    db = ColdNet/WarmNetDataBank()
+
+    # Daten speichern (nur Satoramy hat Berechtigung)
+    db.store_data("cold", "example_key_1", "Langzeitdatenbeispiel", user="Satoramy")
+    db.store_data("warm", "example_key_2", "Echtzeitdatenbeispiel", user="Satoramy")
+
+    # Daten abrufen
+    print("ColdNet-Daten:", db.retrieve_data("cold", user="Satoramy"))
+    print("WarmNet-Daten:", db.retrieve_data("warm", user="Satoramy"))
+
+    db.close_connection()
