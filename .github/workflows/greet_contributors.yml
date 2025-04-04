@@ -1,0 +1,21 @@
+name: Greet Contributors
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Greetings
+        uses: actions/first-interaction@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: >
+            Hi! Welcome to PRAI-KI. Thank you for opening an issue. We look forward to your ideas!
+          pr-message: >
+            Thank you for your first pull request! We'll review it soon.
