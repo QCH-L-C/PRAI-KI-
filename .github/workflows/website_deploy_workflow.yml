@@ -25,3 +25,27 @@ jobs:
       - name: Start Website
         run: |
           python website/app.py
+          
+      - name: Attest Build Provenance
+        uses: actions/attest-build-provenance@v2.3.0
+                    - Name: Ein Build-Artefakt herunterladen
+                    
+  verwendet: actions/download-artifact@v4.3.0
+  mit:
+    # Name des herunterzuladenden Artefakts. Wenn nicht angegeben, werden alle Artefakte für den Lauf heruntergeladen.
+    Name: actions/attest-build-provenance # optional
+    # IDs der herunterzuladenden Artefakte, durch Kommas getrennt. Es können entweder die Eingaben „artifact-ids“ oder „name“ verwendet werden, aber nicht beide.
+    Artefakt-IDs: # optional
+    # Zielpfad. Unterstützt die Tilde-Erweiterung. Standardmäßig $GITHUB_WORKSPACE
+    Pfad: @RFOF-NETWORK/PRAI-KI-/edit/main/.github/workflows/website_deploy_workflow.yml # optional
+    # Ein Glob-Muster, das den herunterzuladenden Artefakten entspricht. Wird ignoriert, wenn ein Name angegeben ist.
+    Muster: # optional
+    # Wenn mehrere Artefakte gefunden werden, ändert dies das Verhalten der Zielverzeichnisse. Wenn „true“, befinden sich die heruntergeladenen Artefakte im angegebenen Verzeichnis. Wenn „false“, werden die heruntergeladenen Artefakte in einzelne benannte Verzeichnisse innerhalb des angegebenen Pfads extrahiert.
+    merge-multiple: # optional, Standard ist false
+    # Das GitHub-Token zur Authentifizierung mit der GitHub-API. Dies ist erforderlich, wenn Artefakte aus einem anderen Repository oder einem anderen Workflow-Lauf heruntergeladen werden. Wenn dies nicht angegeben ist, versucht die Aktion, Artefakte aus dem aktuellen Repository und dem aktuellen Workflow-Lauf herunterzuladen.
+    github-token: # optional
+    # Der Repository-Besitzer und der Repository-Name, verbunden durch "/". Wenn ein GitHub-Token angegeben ist, ist dies das Repository, aus dem die Artefakte heruntergeladen werden.
+    Repository: PRAI-KI- # optional, Standard ist ${{ github.repository }}
+    # Die ID des Workflow-Laufs, aus dem das gewünschte Download-Artefakt hochgeladen wurde. Wenn ein GitHub-Token angegeben ist, ist dies der Lauf, aus dem die Artefakte heruntergeladen werden.
+    run-id: # optional, Standard ist ${{ github.run_id }}
+          
