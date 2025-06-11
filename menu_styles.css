@@ -49,10 +49,17 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.7); /* Glowing bars */
 }
 
+ main
+/* Media Queries für responsive Design (wichtig für das Hamburger-Menü) */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+
 /* Media Queries for responsive design (crucial for hamburger menu) */
 @media (max-width: 768px) {
     .nav-links {
         display: none; /* Hide by default on small screens */
+ gh-pages
         flex-direction: column;
         width: 100%;
         background-color: #0f0f1a; /* Dark background for mobile menu */
@@ -63,6 +70,37 @@
 
     .nav-links.active {
         display: flex;
+ main
+    }
+
+    .nav-links li {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .hamburger-icon {
+        display: flex;
+        position: relative;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 250px;
+        background-color: #333;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 60px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 998;
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+
         position: fixed; /* Fix menu to viewport */
         top: 0;
         right: 0;
@@ -79,6 +117,7 @@
         text-align: left; /* Align links to the left */
         margin: 0;
         width: 100%; /* Make list items full width */
+ gh-pages
     }
 
     .nav-links li a {
@@ -105,6 +144,14 @@
     }
     
     .hamburger-icon.active {
+ main
+        position: fixed;
+        right: 20px;
+        z-index: 1001;
+    }
+}
+
+
         position: fixed; /* Fix hamburger icon when menu is open */
         right: 20px;
         z-index: 1001; /* Ensure it's above the menu */
@@ -112,6 +159,7 @@
 }
 
 /* Hamburger icon animation for 'X' */
+ gh-pages
 .hamburger-icon.active .bar:nth-child(2) {
     opacity: 0;
 }
