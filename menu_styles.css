@@ -43,10 +43,24 @@
     transition: all 0.3s ease-in-out;
 }
 
+ main
 /* Media Queries für responsive Design (wichtig für das Hamburger-Menü) */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
+
+ main
+/* Media Queries für responsive Design (wichtig für das Hamburger-Menü) */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+
+/* Media Queries for responsive design (crucial for hamburger menu) */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide by default on small screens */
+ gh-pages
+ gh-pages
         flex-direction: column;
         width: 100%;
         background-color: #f4f4f4;
@@ -57,6 +71,10 @@
 
     .nav-links.active {
         display: flex;
+ main
+
+ main
+ gh-pages
     }
 
     .nav-links li {
@@ -71,6 +89,8 @@
     
     .nav-links {
         position: fixed;
+ main
+
         top: 0;
         right: 0;
         height: 100%;
@@ -86,6 +106,32 @@
 
     .nav-links.active {
         transform: translateX(0);
+
+        position: fixed; /* Fix menu to viewport */
+ gh-pages
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 250px;
+        background-color: #333;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 60px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 998;
+    }
+
+ main
+    .nav-links.active {
+        transform: translateX(0);
+
+    .nav-links li {
+        text-align: left; /* Align links to the left */
+        margin: 0;
+        width: 100%; /* Make list items full width */
+ gh-pages
+ gh-pages
     }
 
     .nav-links li a {
@@ -100,12 +146,29 @@
     }
 
     .hamburger-icon.active {
+ main
+        position: fixed;
+
+ main
         position: fixed;
         right: 20px;
         z-index: 1001;
     }
 }
 
+
+        position: fixed; /* Fix hamburger icon when menu is open */
+ gh-pages
+        right: 20px;
+        z-index: 1001;
+    }
+}
+
+ main
+
+/* Hamburger icon animation for 'X' */
+ gh-pages
+ gh-pages
 .hamburger-icon.active .bar:nth-child(2) {
     opacity: 0;
 }
