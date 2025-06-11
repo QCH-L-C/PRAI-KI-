@@ -1,4 +1,4 @@
-/* Global Reset and Base Styles */
+/* Globale Reset- und Basis-Styles */
 html, body {
     margin: 0;
     padding: 0;
@@ -7,20 +7,31 @@ html, body {
     overflow-x: hidden;
     scroll-behavior: smooth;
 
+ main
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+
     overflow-x: hidden; /* Prevent horizontal scroll */
     scroll-behavior: smooth;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A more modern, clean font */
  gh-pages
+ gh-pages
 }
 
 body {
+    font-family: Arial, sans-serif;
     line-height: 1.6;
+ main
+    background-color: #f4f4f4;
+    color: #333;
+
  main
     background-color: #f4f4f4;
     color: #333;
 
     background-color: #1a1a2e; /* Dark, cyberpunk background */
     color: #e0e0e0; /* Light text for contrast */
+ gh-pages
  gh-pages
     min-height: 100vh;
     display: flex;
@@ -30,6 +41,10 @@ body {
 
 /* Header Styling */
 .main-header {
+ main
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
  main
     background-color: white;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -43,29 +58,34 @@ body {
 
     background-color: #0f0f1a; /* Even darker header background */
     box-shadow: 0 2px 10px rgba(0, 123, 255, 0.4); /* Blue glowing shadow */
+ gh-pages
     padding: 10px 20px;
     z-index: 100;
     position: relative;
-    border-bottom: 1px solid #007bff; /* Blue border */
 }
 
 .header-content {
+ main
+    max-width: 1200px;
+
     max-width: 1400px; /* Slightly wider header content */
+ gh-pages
  gh-pages
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 15px; /* Add some padding for smaller screens */
 }
 
 .site-title {
-    color: #007bff; /* Baby Blue / Telegram/TON Blue for the title */
-    font-size: 2.2em; /* Slightly larger title */
+    color: #007bff; /* Babyblau / Telegram/TON Blau für den Titel */
+    font-size: 2em;
     font-weight: bold;
     margin: 0;
     padding: 0;
     flex-shrink: 0;
+ main
+
  main
 }
 
@@ -89,27 +109,29 @@ body {
         width: auto;
 
     text-shadow: 0 0 8px rgba(0, 123, 255, 0.8); /* More pronounced glow */
+ gh-pages
 }
 
-/* Container for the main page content */
+/* Container für den Hauptinhalt der Seite */
 .content-container {
-    max-width: 900px; /* Wider content area */
-    margin: 30px auto;
-    background: #2a2a4a; /* Darker background for content */
-    padding: 40px; /* More padding */
-    border-radius: 12px; /* Slightly larger border radius */
-    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3), inset 0 0 10px rgba(0, 123, 255, 0.2); /* Dual glow effect */
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     flex-grow: 1;
     overflow: hidden;
-    border: 1px solid #007bff; /* Blue border */
 }
 
-@media (max-width: 960px) {
+@media (max-width: 840px) {
     .content-container {
         margin-left: 20px;
         margin-right: 20px;
         width: auto;
+ main
+
         padding: 25px; /* Adjust padding for smaller screens */
     }
 }
@@ -117,24 +139,21 @@ body {
     .content-container {
         padding: 15px;
  gh-pages
+ gh-pages
     }
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #4CAF50; /* Greenish glow for headings */
-    text-shadow: 0 0 6px rgba(76, 175, 80, 0.6);
+    color: #2c3e50;
 }
 
 a {
-    color: #00eaff; /* Bright cyan for links */
+    color: #007bff;
     text-decoration: none;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #4CAF50; /* Greenish on hover */
-    text-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
 .long-word-wrap-text {
@@ -148,6 +167,9 @@ footer {
     text-align: center;
  main
     padding: 20px;
+
+ main
+    padding: 20px;
     margin-top: auto;
     background-color: #333;
     color: #f4f4f4;
@@ -157,13 +179,16 @@ footer {
     box-sizing: border-box;
 
     padding: 25px; /* More padding */
+ gh-pages
     margin-top: auto;
-    background-color: #0f0f1a; /* Dark background */
-    color: #a0a0a0; /* Softer text color */
-    border-top: 1px solid #007bff; /* Blue border */
+    background-color: #333;
+    color: #f4f4f4;
+    border-top: 1px solid #ddd;
     width: 100%;
     flex-shrink: 0;
     box-sizing: border-box;
+ main
+
     font-size: 0.9em;
     box-shadow: 0 -2px 10px rgba(0, 123, 255, 0.4); /* Blue glowing shadow */
  gh-pages
@@ -171,21 +196,15 @@ footer {
 
 footer p {
     margin-bottom: 5px;
+ gh-pages
 }
 
-footer a {
-    color: #00eaff; /* Bright cyan for footer links */
-    margin: 0 10px;
-}
-
-footer a:hover {
-    color: #4CAF50; /* Greenish on hover */
-    text-shadow: 0 0 3px rgba(76, 175, 80, 0.5);
-}
-
-/* Styling for the "Improve this page" Container and Link */
+/* Styling für den "Improve this page" Container und Link */
 .improve-page-container {
  main
+
+ main
+ gh-pages
     position: absolute;
     bottom: 80px;
     right: 20px;
@@ -195,6 +214,12 @@ footer a:hover {
     width: auto;
     white-space: nowrap;
     z-index: 90;
+ main
+}
+
+.improve-page-container a.improve-page-link {
+    color: #007bff;
+
 }
 
 .improve-page-container a.improve-page-link {
@@ -220,12 +245,20 @@ footer a:hover {
 .improve-page-container a.improve-page-link {
     color: #4CAF50; /* Greenish glow for action link */
  gh-pages
+ gh-pages
     text-decoration: underline;
     font-weight: bold;
-    text-shadow: 0 0 5px rgba(76, 175, 80, 0.7);
 }
 
 .improve-page-container a.improve-page-link:hover {
+ main
+    color: #4CAF50;
+}
+
+/* Falls die Blog-Post-Inhalte spezielle Markdown-Renderings haben,
+   könnten hier zusätzliche Styles für h1, h2, p, ul, li usw. innerhalb von .content-container benötigt werden.
+   Beispiel: */
+
  main
     color: #4CAF50;
 }
@@ -240,11 +273,16 @@ footer a:hover {
 
 /* Content specific styles */
  gh-pages
+ gh-pages
 .content-container p {
     margin-bottom: 1em;
 }
 
 .content-container ul {
+ main
+    list-style-type: disc;
+    margin-left: 20px;
+
  main
     list-style-type: disc;
     margin-left: 20px;
@@ -258,26 +296,15 @@ footer a:hover {
     list-style-type: none; /* Remove default bullets */
     margin-left: 0;
     padding-left: 20px; /* Add padding for visual alignment */
+ gh-pages
     margin-bottom: 1em;
-}
-
-.content-container ul li {
-    position: relative;
-    padding-left: 25px; /* Space for custom bullet */
-    margin-bottom: 0.5em;
-}
-
-.content-container ul li::before {
-    content: '\2022'; /* Unicode bullet point */
-    color: #4CAF50; /* Greenish bullet */
-    position: absolute;
-    left: 0;
-    font-size: 1.2em;
-    line-height: 1;
 }
 
 .content-container h1, .content-container h2, .content-container h3 {
     margin-top: 1.5em;
+ main
+    margin-bottom: 0.5em;
+
     margin-bottom: 0.8em; /* Slightly more space below headings */
 }
 
@@ -321,5 +348,6 @@ footer a:hover {
     background-color: rgba(0, 234, 255, 0.1);
     color: #4CAF50; /* Greenish on hover */
     text-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+ gh-pages
  gh-pages
 }
