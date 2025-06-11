@@ -28,7 +28,7 @@ jobs:
           
       - name: Attest Build Provenance
         uses: actions/attest-build-provenance@v2.3.0
-                    - Name: Ein Build-Artefakt herunterladen
+                    - Name: Ein build-artefact download
                     
   verwendet: actions/download-artifact@v4.3.0
   mit:
