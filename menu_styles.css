@@ -8,7 +8,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
+    display: flex; /* Zeigt Links nebeneinander an auf großen Bildschirmen */
 }
 
 .nav-links li a {
@@ -25,7 +25,7 @@
 
 /* Hamburger-Icon (drei graue Striche) */
 .hamburger-icon {
-    display: none;
+    display: none; /* Standardmäßig versteckt auf großen Bildschirmen */
     flex-direction: column;
     justify-content: space-around;
     width: 30px;
@@ -43,24 +43,10 @@
     transition: all 0.3s ease-in-out;
 }
 
- main
 /* Media Queries für responsive Design (wichtig für das Hamburger-Menü) */
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Wenn Bildschirm kleiner als 768px ist */
     .nav-links {
-        display: none;
-
- main
-/* Media Queries für responsive Design (wichtig für das Hamburger-Menü) */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-
-/* Media Queries for responsive design (crucial for hamburger menu) */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none; /* Hide by default on small screens */
- gh-pages
- gh-pages
+        display: none; /* Standardmäßig versteckt das gesamte Menü */
         flex-direction: column;
         width: 100%;
         background-color: #f4f4f4;
@@ -70,11 +56,7 @@
     }
 
     .nav-links.active {
-        display: flex;
- main
-
- main
- gh-pages
+        display: flex; /* Menü anzeigen, wenn aktiv */
     }
 
     .nav-links li {
@@ -83,14 +65,13 @@
     }
 
     .hamburger-icon {
-        display: flex;
-        position: relative;
+        display: flex; /* Hamburger-Icon anzeigen auf kleinen Bildschirmen */
+        position: relative; /* Muss relativ sein, um vom Z-Index betroffen zu sein */
     }
     
+    /* Anpassung für die Positionierung des Menüs, wenn es aufgeklappt ist */
     .nav-links {
-        position: fixed;
- main
-
+        position: fixed; /* Fixiert das Menü im Viewport */
         top: 0;
         right: 0;
         height: 100%;
@@ -99,39 +80,13 @@
         flex-direction: column;
         align-items: flex-start;
         padding-top: 60px;
-        transform: translateX(100%);
+        transform: translateX(100%); /* Zuerst komplett nach rechts verschieben (unsichtbar) */
         transition: transform 0.3s ease-in-out;
-        z-index: 998;
+        z-index: 998; /* Unter dem Hamburger Icon */
     }
 
     .nav-links.active {
-        transform: translateX(0);
-
-        position: fixed; /* Fix menu to viewport */
- gh-pages
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: 250px;
-        background-color: #333;
-        flex-direction: column;
-        align-items: flex-start;
-        padding-top: 60px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 998;
-    }
-
- main
-    .nav-links.active {
-        transform: translateX(0);
-
-    .nav-links li {
-        text-align: left; /* Align links to the left */
-        margin: 0;
-        width: 100%; /* Make list items full width */
- gh-pages
- gh-pages
+        transform: translateX(0); /* Menü einblenden */
     }
 
     .nav-links li a {
@@ -146,29 +101,13 @@
     }
 
     .hamburger-icon.active {
- main
-        position: fixed;
-
- main
-        position: fixed;
-        right: 20px;
-        z-index: 1001;
+        position: fixed; /* Fixiert das Icon, wenn das Menü offen ist */
+        right: 20px; /* Positioniert es fest am rechten Rand */
+        z-index: 1001; /* Liegt über dem aufgeklappten Menü */
     }
 }
 
-
-        position: fixed; /* Fix hamburger icon when menu is open */
- gh-pages
-        right: 20px;
-        z-index: 1001;
-    }
-}
-
- main
-
-/* Hamburger icon animation for 'X' */
- gh-pages
- gh-pages
+/* Animation für das Hamburger-Icon, wenn es aktiv ist */
 .hamburger-icon.active .bar:nth-child(2) {
     opacity: 0;
 }
