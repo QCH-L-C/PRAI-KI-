@@ -26,7 +26,7 @@ body {
     max-width: 960px; /* Constrain header content to align with main content */
     margin: 0 auto; /* Center the header content */
     display: flex;
-    justify-content: flex-start; /* Align items to the start for logo and title */
+    justify-content: space-between; /* Space between logo/title and navbar */
     align-items: center;
     padding: 0 20px; /* Horizontal padding for content inside this constrained header */
     box-sizing: border-box; /* Include padding in width */
@@ -36,7 +36,7 @@ body {
 .site-title { /* This is the text title in the header */
     color: #0088cc; /* Telegram/TON Blue */
     font-family: 'Orbitron', sans-serif;
-    font-size: 2.5em; /* Set font size for prominence */
+    font-size: 2.5em; /* Adjusted font size for larger display */
     font-weight: bold;
     margin: 0;
     padding: 0;
@@ -46,10 +46,10 @@ body {
     overflow: hidden; /* Hide overflow */
     text-overflow: ellipsis; /* Add ellipsis if truncated */
     line-height: 1.2; /* Ensure consistent line height */
-    flex-grow: 1; /* Allow title to grow and push navbar */
-    text-align: left; /* Text align left within its container */
-    /* On mobile, this will be centered by flexbox in header-left-section */
+    max-width: calc(100% - 100px); /* Adjust based on logo width and desired spacing, prevents pushing nav */
+    /* This max-width will be dynamically adjusted by JS if needed for better responsiveness */
 }
+
 
 /* Content Container */
 .content-container {
@@ -239,4 +239,4 @@ footer a:hover {
     .praiai-search-button {
         padding: 12px 20px;
     }
-}
+        }
