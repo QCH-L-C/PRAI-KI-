@@ -10,7 +10,7 @@
 .global-dropdown {
     position: relative;
     display: inline-block; /* Allows side-by-side with other elements */
-    margin-left: auto; /* Pushes it to the right within the navbar if other elements are present */
+    margin-left: auto;
 }
 
 /* Hamburger menu icon (for mobile) */
