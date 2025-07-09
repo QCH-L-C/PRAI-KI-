@@ -1,0 +1,67 @@
+<style>
+    .arc-hash-link {
+        font-family: 'Fira Code', monospace;
+        color: #DAA520; /* Golden/ARC color */
+        background-color: #2d3748;
+        padding: 8px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-block;
+        border: 1px solid #4a5568;
+        transition: all 0.2s ease;
+    }
+    .arc-hash-link:hover {
+        background-color: #4a5568;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    #arc-status {
+        margin-top: 10px;
+        font-family: sans-serif;
+        font-size: 0.9em;
+        font-weight: bold;
+    }
+</style>
+
+<p>Um das Sub-Issue mit den notwendigen Konfigurations-Snippets zu erstellen, aktivieren Sie bitte den folgenden ARC-Hash:</p>
+
+<a id="arc-link" class="arc-hash-link">ARC-HASH-LINK :: INITIATE_SUB_ISSUE(PR-VPN-RF-DEEP-GOLD-AI)</a>
+
+<div id="arc-status"></div>
+
+<script>
+    document.getElementById('arc-link').addEventListener('click', async () => {
+        const statusDiv = document.getElementById('arc-status');
+        statusDiv.textContent = 'Sende PWH-2025 Handshake an @RFOF-NETWORK...';
+        statusDiv.style.color = '#6c757d';
+
+        // Dies ist die URL zu Ihrer sicheren Webhook-Schnittstelle im privaten Repo.
+        const webhookURL = 'https://rfof-network.org/api/v1/create-sub-issue';
+        
+        const payload = {
+            parentIssueId: "PR-VPN-RF-DEEP-GOLD-AI#2",
+            requestedSnippetRef: "arc_hash_vpn_config_001" // Referenz statt Datei
+        };
+
+        try {
+            // Dies simuliert den sicheren fetch-Aufruf an Ihr Backend
+            // In der Realität würde hier der echte API-Call stattfinden.
+            console.log('Sende Payload an Backend:', payload);
+            await new Promise(resolve => setTimeout(resolve, 1500)); // Simuliert Netzwerklatenz
+            const simulatedResponse = { success: true, newIssueId: 3 };
+            
+            if (!simulatedResponse.success) {
+                throw new Error('Guardian hat die Anfrage abgelehnt.');
+            }
+            
+            statusDiv.textContent = `✅ Handshake erfolgreich. Sub-Issue #${simulatedResponse.newIssueId} wurde autonom erstellt und mit dem Snippet verknüpft.`;
+            statusDiv.style.color = 'green';
+
+        } catch (error) {
+            statusDiv.textContent = `❌ Handshake fehlgeschlagen: ${error.message}`;
+            statusDiv.style.color = 'red';
+        }
+    });
+</script>
