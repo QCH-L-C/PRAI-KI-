@@ -15,7 +15,7 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=[
-        "Flask==2.2.3",
+        "Flask==3.1.3",
         "tensorflow==2.12.1",
         "numpy==1.24.2",
         "pandas==1.5.3",
