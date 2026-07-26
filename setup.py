@@ -20,7 +20,7 @@ setup(
         "numpy==1.24.2",
         "pandas==1.5.3",
         "svgwrite==1.4.1",
-        "Pillow==9.4.0"
+        "Pillow==12.3.0"
     ],
     classifiers=[
         "Programming Language :: Python :: 3.8",
